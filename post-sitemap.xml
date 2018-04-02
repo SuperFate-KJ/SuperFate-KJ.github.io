@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://yoursite.com/2017/12/01/fastcgi_php-fpm/</loc>
+        <lastmod>2018-04-02T11:01:48.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://yoursite.com/2017/06/06/Encryption/</loc>
         <lastmod>2018-04-02T10:55:42.000Z</lastmod>
         <changefreq>weekly</changefreq>
