@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          linux下的LVM初识 - blog | superlks
+          [Hexo] Theme BeanTech - blog | superlks
         
     </title>
 
-    <link rel="canonical" href="http://yoursite.com/2017/03/13/LVM/">
+    <link rel="canonical" href="http://yoursite.com/2017/03/18/bootstrap-table/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -92,14 +92,14 @@
                             
                               <a class="tag" href="/tags/#Blog" title="Blog">Blog</a>
                             
-                              <a class="tag" href="/tags/#LVM" title="LVM">LVM</a>
+                              <a class="tag" href="/tags/#Hexo" title="Hexo">Hexo</a>
                             
                         </div>
-                        <h1>linux下的LVM初识</h1>
-                        <h2 class="subheading">LVM</h2>
+                        <h1>[Hexo] Theme BeanTech</h1>
+                        <h2 class="subheading">This is hexo theme Demo.</h2>
                         <span class="meta">
                             Posted by superfate_kj on
-                            2017-03-13
+                            2017-03-18
                         </span>
                     </div>
                 
@@ -216,38 +216,60 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="什么是lvm">什么是LVM？</span></h1>
-<ul>
-<li>什么是LVM?LVM(Logical Volume Manager)逻辑卷管理，是一种将一个或多个硬盘的分区在逻辑上集合，相当于一个大硬盘来使用，当硬盘的空间不够使用的时候，可以继续将其它的硬盘的 分区加入其中，这样可以事项一种磁盘空间的动态管理，相对于普通的磁盘分区有很大的灵活性，使用普通的磁盘分区，当一个磁盘的分区空间不够使用的时候，可 能就会带来很大的麻烦。使用LVM在一定程度上就可以解决普通磁盘分区带来的问题</li>
-</ul>
-<h3><span id="为什么使用lvm">为什么使用LVM?</span></h3>
-<ul>
-<li>LVM通常用于装备大量磁盘的系统，但它同样适于仅有一、两块硬盘的小系统。</li>
-</ul>
-<p><strong>小系统使用LVM的益处?</strong></p>
-<ul>
-<li>传统的文件系统是基于分区的，一个文件系统对应一个分区。这种方式比较直观，但不易改变：<br>
-1.不同的分区相对独立，无相互联系，各分区空间很易利用不平衡，空间不能充分利用；<br>
-2.当一个文件系统/分区已满时，无法对其扩充，只能采用重新分区/建立文件系统，非常麻烦；或把分区中的数据移到另一个更大的分区中；或采用符号连接的方式使用其它分区的空间。<br>
-3.如果要把硬盘上的多个分区合并在一起使用，只能采用再分区的方式，这个过程需要数据的备份与恢复。</li>
-<li>当采用LVM时，情况有所不同：<br>
-1.硬盘的多个分区由LVM统一为卷组管理，可以方便的加入或移走分区以扩大或减小卷组的可用容量，充分利用硬盘空间；<br>
-2.文件系统建立在逻辑卷上，而逻辑卷可根据需要改变大小(在卷组容量范围内)以满足要求；<br>
-3.文件系统建立在LVM上，可以跨分区，方便使用；</li>
-</ul>
-<p>**大系统使用LVM的益处? **</p>
-<ul>
-<li>在使用很多硬盘的大系统中，使用LVM主要是方便管理、增加了系统的扩展性。 在一个有很多不同容量硬盘的大型系统中，对不同的用户的空间分配是一个技巧性的工作，要在用户需求与实际可用空间中寻求平衡。用户/用户组的空间建立在LVM上，可以随时按要求增大，或根据使用情况对各逻辑卷进行调整。当系统空间不足而加入新的硬盘时，不必把用户的数据从原硬盘迁 移到新硬盘，而只须把新的分区加入卷组并扩充逻辑卷即可。同样，使用LVM可以在不停服务的情况下。把用户数据从旧硬盘转移到新硬盘空间中去。</li>
-</ul>
+                <blockquote>
+<p>Ported Theme of <a href="https://github.com/Huxpro/huxpro.github.io" target="_blank" rel="noopener">Hux Blog</a>, Thank <a href="https://github.com/Huxpro" target="_blank" rel="noopener">Huxpro</a> for designing such a flawless theme.</p>
+<p>This BeanTech theme created by <a href="http://beantech.org" target="_blank" rel="noopener">YuHsuan</a> modified from the original Porter <a href="http://kaijun.rocks/hexo-theme-huxblog/" target="_blank" rel="noopener">Kaijun</a></p>
+</blockquote>
+<h1><span id="live-demo"></span></h1>
 <hr>
-<p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1489422822199&amp;di=53b71cefb4e56e518dba2a6f8f124bb5&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.linuxprobe.com%2Fwp-content%2Fuploads%2F2015%2F12%2FLinux_LVM.jpg" alt="LVM"></p>
-<p><em>名词解释</em></p>
-<ul>
-<li>PV(Physical Volume)：物理卷，处于LVM最底层，可以是物理硬盘或者分区。</li>
-<li>PP(Physical Extend)：物理区域，PV中可以用于分配的最小存储单元，可以在创建PV的时候制定，如1M, 2M, 4M, 8M, 32M, 64M…组成同一VG中所有PV的PE大小应该相同。</li>
-<li>VG(Volume Group)：卷组，建立在PV之上，可以含有一个到多个PV。</li>
-<li>LV(Logical Volume)：逻辑卷，建立在VG之上，相当于原来分区的概念。不过大小可以动态改变。</li>
-</ul>
+<p><img src="http://beantech.org/img/beantech-desktop.png" alt="BeanTech Desktop"></p>
+<h1><span id="usage">Usage</span></h1>
+<hr>
+<p>I publish the whole project for your convenience, so you can just follow the instruction down below, then you can easily customiz your own blog!</p>
+<p>Let’s begin!!!</p>
+<h2><span id="init">Init</span></h2>
+<hr>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/YenYuHsuan/hexo-theme-beantech.git ./hexo-beantech</span><br><span class="line"><span class="built_in">cd</span> hexo-beantech</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<h2><span id="modify">Modify</span></h2>
+<hr>
+<p>Modify <code>_config.yml</code> file with your own info.<br>
+Especially the section:</p>
+<h3><span id="deployment">Deployment</span></h3>
+<p>Replace to your own repo!</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="attr">https://github.com/&lt;yourAccount&gt;/&lt;repo&gt;</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">&lt;your-branch&gt;</span></span><br></pre></td></tr></table></figure>
+<h3><span id="sidebar-settings">Sidebar settings</span></h3>
+<p>Copy your avatar image to <code>&lt;root&gt;/img/</code> and modify the <code>_config.yml</code>:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sidebar:</span> <span class="literal">true</span>    <span class="comment"># whether or not using Sidebar.</span></span><br><span class="line"><span class="attr">sidebar-about-description:</span> <span class="string">"&lt;your description&gt;"</span></span><br><span class="line"><span class="attr">sidebar-avatar:</span> <span class="string">img/&lt;your</span> <span class="string">avatar</span> <span class="string">path&gt;</span></span><br></pre></td></tr></table></figure>
+<p>and activate your personal widget you like</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">widgets:</span>         <span class="comment"># here are widget you can use, you can comment out</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">featured-tags</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">short-about</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">recent-posts</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">friends-blog</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">archive</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">category</span></span><br></pre></td></tr></table></figure>
+<p>if you want to add sidebar widget, please add at <code>layout/_widget</code>.</p>
+<h3><span id="signature-setup">Signature Setup</span></h3>
+<p>Copy your signature image to <code>&lt;root&gt;/img/signature</code> and modify the <code>_config.yml</code>:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">signature:</span> <span class="literal">true</span>   <span class="comment"># show signature</span></span><br><span class="line"><span class="attr">signature-img:</span> <span class="string">img/signature/&lt;your-signature-ID&gt;</span></span><br></pre></td></tr></table></figure>
+<h3><span id="go-to-top-icon-setup">Go to top icon Setup</span></h3>
+<p>My icon is using iron man, you can change to your own icon at <code>css/image</code>.</p>
+<h3><span id="post-tag">Post tag</span></h3>
+<p>You can decide to show post tags or not.</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">home_posts_tag:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p><img src="home_posts_tag-true.png" alt="home_posts_tag-true"></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">home_posts_tag:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p><img src="home_posts_tag-false.png" alt="home_posts_tag-false"></p>
+<h3><span id="markdown-render">Markdown render</span></h3>
+<p>My markdown render engine plugin is <a href="https://github.com/celsomiranda/hexo-renderer-markdown-it" target="_blank" rel="noopener">hexo-renderer-markdown-it</a>.</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Markdown-it config</span></span><br><span class="line"><span class="comment">## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki</span></span><br><span class="line"><span class="attr">markdown:</span></span><br><span class="line"><span class="attr">  render:</span></span><br><span class="line"><span class="attr">    html:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    xhtmlOut:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">    breaks:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    linkify:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    typographer:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    quotes:</span> <span class="string">'“”‘’'</span></span><br></pre></td></tr></table></figure>
+<p>and if you want to change the header anchor ‘ℬ’, you can go to <code>layout/post.ejs</code> to change it.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span>(<span class="string">"https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        anchors.options = &#123;</span><br><span class="line">          visible: <span class="string">'hover'</span>,</span><br><span class="line">          placement: <span class="string">'left'</span>,</span><br><span class="line">          icon: ℬ <span class="comment">// this is the header anchor "unicode" icon</span></span><br><span class="line">        &#125;;</span><br></pre></td></tr></table></figure>
+<h2><span id="hexo-basics">Hexo Basics</span></h2>
+<hr>
+<p>Some hexo command:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo new post <span class="string">"&lt;post name&gt;"</span> <span class="comment"># you can change post to another layout if you want</span></span><br><span class="line">hexo clean &amp;&amp; hexo generate <span class="comment"># generate the static file</span></span><br><span class="line">hexo server <span class="comment"># run hexo in local environment</span></span><br><span class="line">hexo deploy <span class="comment"># hexo will push the static files automatically into the specific branch(gh-pages) of your repo!</span></span><br></pre></td></tr></table></figure>
+<h1><span id="have-fun-_">Have fun ^_^</span></h1>
+<hr>
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- Place this tag where you want the button to render. -->
+<p>Please <a class="github-button" href="https://github.com/YenYuHsuan/hexo-theme-beantech" data-icon="octicon-star" aria-label="Star YenYuHsuan/hexo-theme-beantech on GitHub" target="_blank" rel="noopener">Star</a> this Project if you like it! <a class="github-button" href="https://github.com/YenYuHsuan" aria-label="Follow @YenYuHsuan on GitHub" target="_blank" rel="noopener">Follow</a> would also be appreciated!<br>
+Peace!</p>
 
                 
 
@@ -256,12 +278,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2017/03/18/bootstrap-table/" data-toggle="tooltip" data-placement="top" title="[Hexo] Theme BeanTech">&larr; Previous Post</a>
+                            <a href="/2017/06/06/Encryption/" data-toggle="tooltip" data-placement="top" title="关于加密的一些东西">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2016/11/28/virtual server/" data-toggle="tooltip" data-placement="top" title="模板部署虚拟机，解决网卡配置">Next Post &rarr;</a>
+                            <a href="/2017/03/13/LVM/" data-toggle="tooltip" data-placement="top" title="linux下的LVM初识">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -302,7 +324,7 @@
                        
                           <a class="tag" href="/tags/#Blog" title="Blog">Blog</a>
                         
-                          <a class="tag" href="/tags/#LVM" title="LVM">LVM</a>
+                          <a class="tag" href="/tags/#Hexo" title="Hexo">Hexo</a>
                         
                     </div>
                 </section>
@@ -331,8 +353,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "your-disqus-ID";
-    var disqus_identifier = "http://yoursite.com/2017/03/13/LVM/";
-    var disqus_url = "http://yoursite.com/2017/03/13/LVM/";
+    var disqus_identifier = "http://yoursite.com/2017/03/18/bootstrap-table/";
+    var disqus_url = "http://yoursite.com/2017/03/18/bootstrap-table/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
