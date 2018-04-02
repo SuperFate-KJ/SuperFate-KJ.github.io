@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          服务器的学习 - blog | superlks
+          模板部署虚拟机，解决网卡配置 - blog | superlks
         
     </title>
 
-    <link rel="canonical" href="http://yoursite.com/2016/07/22/learn_server/">
+    <link rel="canonical" href="http://yoursite.com/2016/11/28/virtual server/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -90,18 +90,18 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#linux" title="linux">linux</a>
-                            
                               <a class="tag" href="/tags/#Blog" title="Blog">Blog</a>
                             
-                              <a class="tag" href="/tags/#apache server" title="apache server">apache server</a>
+                              <a class="tag" href="/tags/#虚拟机" title="虚拟机">虚拟机</a>
+                            
+                              <a class="tag" href="/tags/#网络" title="网络">网络</a>
                             
                         </div>
-                        <h1>服务器的学习</h1>
-                        <h2 class="subheading">server</h2>
+                        <h1>模板部署虚拟机，解决网卡配置</h1>
+                        <h2 class="subheading">虚拟机</h2>
                         <span class="meta">
                             Posted by superfate_kj on
-                            2016-07-22
+                            2016-11-28
                         </span>
                     </div>
                 
@@ -218,70 +218,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="http服务器apache2">HTTP服务器：apache2</span></h2>
-<h3><span id="本次实验操作在ubuntu下完成">本次实验操作在ubuntu下完成</span></h3>
-<p><em>在搭这个服务器之前，我看了很多资料，书上的，网上的都有很多资料，可自行google  or  百度</em></p>
-<p><strong>首先，如果是ubuntu系统，那就直接用自带的软件源安装就可以了</strong></p>
-<ul>
-<li>
-<p>可以先用whereis命令查找apache2：whereis apache2</p>
-</li>
-<li>
-<p>有的系统会找到apache2-bin文件，如果是的话，也一样使用apt-get命令安装，会出现一个apache2文件，此时再用apt-get安装apache2就可以了。</p>
-</li>
-<li>
-<p>安装完成后，打开浏览器访问http://localhost/，应该会看见这几个字Apache2 Ubuntu Default Page.这样基本上就搭建成功了</p>
-</li>
-<li>
-<p>如果没有看见，则有可能是服务器没启动，可以手动启动，命令 sudo /etc/init.d/apache2 start</p>
-</li>
-</ul>
-<p><strong>虽然上面的方法可以搭建成功，不过我更推荐下面这种方式，因为可以获得最新的服务器版本以及更高的可定制性</strong></p>
-<p><strong>使用源码安装</strong></p>
-<ul>
-<li>
-<p><a href="www.apache.org">apache官网</a>自行下载</p>
-</li>
-<li>
-<p>还要下载服务器的依赖包<br>
-<a href="http://apr.apache.org/download.cgi" target="_blank" rel="noopener">下载apr-1.4.5.tar.gz、apr-util-1.3.12.tar.gz</a><br>
-<a href="http://sourceforge.net/projects/pcre/files/latest/download" target="_blank" rel="noopener">下载pcre-8.31.zip</a><br>
-下载之后自行用相应的命令解压缩</p>
-</li>
-<li>
-<p>[root@localhost bin]# tar -zxf apr-1.4.5.tar.gz<br>
-[root@localhost apr-1.4.5]# ./configure --prefix=/usr/local/apr<br>
-[root@localhost apr-1.4.5]# make<br>
-[root@localhost apr-1.4.5]# make install</p>
-</li>
-<li>
-<p>[root@localhost bin]# tar -zxf apr-util-1.3.12.tar.gz<br>
-[root@localhost apr-util-1.3.12]# ./configure --prefix=/usr/local/apr-util -with-apr=/usr/local/apr/bin/apr-1-config<br>
-[root@localhost apr-util-1.3.12]# make<br>
-[root@localhost apr-util-1.3.12]# make install</p>
-</li>
-<li>
-<p>[root@localhost ~]# unzip pcre-8.31.zip<br>
-[root@localhost ~]# cd pcre-8.31<br>
-[root@localhost pcre-8.31]# ./configure --prefix=/usr/local/pcre<br>
-[root@localhost pcre-8.31]# make[root@localhost pcre-8.31]# make install</p>
-</li>
-<li>
-<p>启动Apache：/usr/local/apache2/bin/apachectl start</p>
-</li>
-<li>
-<p>停止Apache：/usr/local/apache2/bin/apachectl stop</p>
-</li>
-<li>
-<p>重启Apache：/usr/local/apache2/bin/apachectl restart</p>
-</li>
-</ul>
-<p><a href="http://blog.csdn.net/ritterliu/article/details/7525412" target="_blank" rel="noopener">jdk安装方法</a></p>
-<p>**补充：**我在搭建apache2+php+tomcat+Mysql的时候遇到的一些问题</p>
-<ul>
-<li>在搭建php环境时，系统软件源是php5，我想装一个最新版的。于是自己从php官网下载源码安装的，其中遇到几个问题，这个源码安装需要第三方的依赖包，需要自行下载，否则，安装的时候就会报错，文件名是 libxml2 以及还有另外一个文件，开始找了好几个方法都不行，于是还是在官网找的源码，一起安装的。</li>
-</ul>
-
+                <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#此脚本实现从ESXI新开模板之后，快速配置机器网络及MAC地址，涉及两个文件的更改</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#定义常量</span></span><br><span class="line"></span><br><span class="line">net_rule_file=<span class="string">"/etc/udev/rules.d/70-persistent-net.rules"</span></span><br><span class="line">net_conf_file=<span class="string">"/etc/sysconfig/network-scripts/ifcfg-eth0"</span></span><br><span class="line">netmask_conf=<span class="string">"255.255.xxx.0"</span></span><br><span class="line">gateway_conf=<span class="string">"192.168.xxx.xx"</span></span><br><span class="line">dns1_conf=<span class="string">"114.xxx.xxx.114"</span></span><br><span class="line">old_mac=<span class="string">"00:50:56:xx:F6:xx"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#判断是否已正确执行过脚本，然后从文件中删除旧的MAC，更改为新的MAC地址,--eth0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>  (cat <span class="variable">$net_rule_file</span>|grep -i <span class="variable">$old_mac</span>) ;<span class="keyword">then</span></span><br><span class="line">  new_mac_str=$(sed -n -e <span class="string">'/eth1/ p'</span> <span class="variable">$net_rule_file</span>)</span><br><span class="line">  <span class="comment">#new_mac_1=$&#123;new_mac_str:64:17&#125;</span></span><br><span class="line">  new_mac=$(<span class="built_in">echo</span> <span class="variable">$new_mac_str</span>| awk -F <span class="string">','</span> &#123;<span class="string">'print $4'</span>&#125;|awk -F <span class="string">'=='</span> &#123;<span class="string">'print $2'</span>&#125;|sed <span class="string">'s/\"//g'</span>)</span><br><span class="line">  sed -i <span class="string">"/<span class="variable">$old_mac</span>/Id"</span> <span class="variable">$net_rule_file</span></span><br><span class="line">  sed -i <span class="string">"s/eth1/eth0/g"</span> <span class="variable">$net_rule_file</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  new_mac_str=$(sed -n -e <span class="string">'/eth0/ p'</span> <span class="variable">$net_rule_file</span>)</span><br><span class="line">  <span class="comment">#new_mac_1=$&#123;new_mac_str:64:17&#125;</span></span><br><span class="line">  new_mac=$(<span class="built_in">echo</span> <span class="variable">$new_mac_str</span>| awk -F <span class="string">','</span> &#123;<span class="string">'print $4'</span>&#125;|awk -F <span class="string">'=='</span> &#123;<span class="string">'print $2'</span>&#125;|sed <span class="string">'s/\"//g'</span>)</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"done 70-persistent-net.rules file!"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#===================================</span></span><br><span class="line"><span class="comment">#将新的网络配置入写网卡文件，重启网络</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>  (cat <span class="variable">$net_conf_file</span>|grep <span class="variable">$netmask_conf</span>) ;<span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"done /etc/sysconfig/network-scripts/ifcfg-eth0"</span></span><br><span class="line"><span class="keyword">elif</span> [ ! -n <span class="string">"<span class="variable">$1</span>"</span> ] ;<span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"you have not input a ip address!"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  sed -i <span class="string">"/<span class="variable">$old_mac</span>/Id"</span> <span class="variable">$net_conf_file</span></span><br><span class="line">  sed -i <span class="string">"s/dhcp/static/g"</span> <span class="variable">$net_conf_file</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"HWADDR=<span class="variable">$new_mac</span>"</span> &gt;&gt; <span class="variable">$net_conf_file</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"IPADDR=<span class="variable">$1</span>"</span> &gt;&gt; <span class="variable">$net_conf_file</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"NETMASK=<span class="variable">$netmask_conf</span>"</span> &gt;&gt; <span class="variable">$net_conf_file</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"GATEWAY=<span class="variable">$gateway_conf</span>"</span> &gt;&gt; <span class="variable">$net_conf_file</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"DNS1=<span class="variable">$dns1_conf</span>"</span> &gt;&gt; <span class="variable">$net_conf_file</span></span><br><span class="line">  service network restart</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
                 
 
                 <hr>
@@ -289,12 +226,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2016/11/28/virtual server/" data-toggle="tooltip" data-placement="top" title="模板部署虚拟机，解决网卡配置">&larr; Previous Post</a>
+                            <a href="/2017/03/18/hexo-theme-beantech/" data-toggle="tooltip" data-placement="top" title="[Hexo] Theme BeanTech">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2016/07/21/learn_ssh/" data-toggle="tooltip" data-placement="top" title="关于ssh远程登录主机">Next Post &rarr;</a>
+                            <a href="/2016/07/22/learn_server/" data-toggle="tooltip" data-placement="top" title="服务器的学习">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -333,11 +270,11 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#linux" title="linux">linux</a>
-                        
                           <a class="tag" href="/tags/#Blog" title="Blog">Blog</a>
                         
-                          <a class="tag" href="/tags/#apache server" title="apache server">apache server</a>
+                          <a class="tag" href="/tags/#虚拟机" title="虚拟机">虚拟机</a>
+                        
+                          <a class="tag" href="/tags/#网络" title="网络">网络</a>
                         
                     </div>
                 </section>
@@ -366,8 +303,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "your-disqus-ID";
-    var disqus_identifier = "http://yoursite.com/2016/07/22/learn_server/";
-    var disqus_url = "http://yoursite.com/2016/07/22/learn_server/";
+    var disqus_identifier = "http://yoursite.com/2016/11/28/virtual server/";
+    var disqus_url = "http://yoursite.com/2016/11/28/virtual server/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
