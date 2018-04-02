@@ -65,6 +65,20 @@
     </url>
 
     <url>
+        <loc>http://yoursite.com/tags/kubernetes/</loc>
+        <lastmod>2018-04-02T11:00:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/docker/</loc>
+        <lastmod>2018-04-02T11:00:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://yoursite.com/tags/Blog/</loc>
         <lastmod>2018-04-02T11:01:48.000Z</lastmod>
         <changefreq>weekly</changefreq>
