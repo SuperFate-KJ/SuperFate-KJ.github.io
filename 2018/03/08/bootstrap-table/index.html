@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          关于bootstrap-table的使用 - blog | superlks
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/2018/03/08/bootstrap-table/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('Demo.png')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Blog" title="Blog">Blog</a>
+                            
+                              <a class="tag" href="/tags/#bootstrap-table" title="bootstrap-table">bootstrap-table</a>
+                            
+                        </div>
+                        <h1>关于bootstrap-table的使用</h1>
+                        <h2 class="subheading">bootstrap-table</h2>
+                        <span class="meta">
+                            Posted by superfate_kj on
+                            2018-03-08
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">总会有一些不经意的灵感</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p><em>作为运维工程师，实习时，公司让开发一个设备管理系统，供内部人员使用，毕竟机房的机器也有一千多台了，而且分散在全国各地，一直用Excel管理的，多有不便，于是我就接到任务让开发这个系统</em></p>
+<ul>
+<li>因为一直没怎么写过前端页面，在完成这个web任务的时候，踩过很多坑，下面我一一道来。</li>
+</ul>
+<h3><span id="项目概况">项目概况</span></h3>
+<ul>
+<li>
+<p>整个项目使用的Flask框架，因为用框架开发的话，比较方便，毕竟不是特别擅长前端开发，而且还要和原有的一个系统对接</p>
+</li>
+<li>
+<p>因为目前数据不多，我就直接处理了excel数据转换成json，后期迭代的话，想着用MongoDB来存储数据</p>
+</li>
+<li>
+<p>这个插件的<a href="http://bootstrap-table.wenzhixin.net.cn/" target="_blank" rel="noopener">官网</a></p>
+</li>
+<li>
+<p>github项目<a href="https://github.com/wenzhixin/bootstrap-table" target="_blank" rel="noopener">地址</a></p>
+</li>
+</ul>
+<h3><span id="首先">首先</span></h3>
+<ul>
+<li>
+<p>将项目clone或者下载到本地</p>
+</li>
+<li>
+<p>并将文件放入Flask的static目录，到时候直接引用</p>
+</li>
+</ul>
+<h3><span id="其次">其次</span></h3>
+<ul>
+<li>在代码中引用这些静态文件</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"static/bootstrap-table/src/bootstrap-table.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"static/assets/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>                         </span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"static/bootstrap-table/src/bootstrap-table.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>       </span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"static/bootstrap-table/src/locale/bootstrap-table-zh-CN.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>然后用id=table来启动表格，代码如下</li>
+</ul>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;table id=<span class="string">"table"</span>                                                           </span><br><span class="line">         <span class="meta">data</span>-toolbar=<span class="string">"#toolbar"</span>                                              </span><br><span class="line">   <span class="meta">data</span>-search=<span class="string">"true"</span>                                                   </span><br><span class="line">   <span class="meta">data</span>-show-refresh=<span class="string">"true"</span>                                             </span><br><span class="line">         <span class="meta">data</span>-show-toggle=<span class="string">"false"</span>                                             </span><br><span class="line">         <span class="meta">data</span>-show-columns=<span class="string">"true"</span>                                             </span><br><span class="line">         <span class="meta">data</span>-show-<span class="meta">export</span>=<span class="string">"false"</span>                                                                                                                                                                                                                                                                 </span><br><span class="line">         <span class="meta">data</span>-detail-view=<span class="string">"true"</span>                                              </span><br><span class="line">         <span class="meta">data</span>-detail-formatter=<span class="string">"detailFormatter"</span>                              </span><br><span class="line">         <span class="meta">data</span>-minimum-count-columns=<span class="string">"2"</span>                                       </span><br><span class="line">         <span class="meta">data</span>-show-pagination-<span class="keyword">switch="true" </span>                                  </span><br><span class="line">         <span class="meta">data</span>-id-<span class="meta">field</span>=<span class="string">"id"</span>                                                   </span><br><span class="line">         <span class="meta">data</span>-page-list=<span class="string">"[10, 25, 50, 100, ALL]"</span>                              </span><br><span class="line">         <span class="meta">data</span>-show-footer=<span class="string">"false"</span>                                             </span><br><span class="line">         <span class="meta">data</span>-side-pagination=<span class="string">"server"</span>                                        </span><br><span class="line">         <span class="meta">data</span>-url=<span class="string">"get_data"</span>                                                  </span><br><span class="line">         <span class="meta">data</span>-response-handle=<span class="string">"responseHandler"</span>&gt;                              </span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><em>关于这些data-xxx的参数可以在官网查到，而且有中文很好理解，也有相应的示例</em></p>
+</li>
+<li>
+<p><em>table表格启动有两种方式，github示例解释有两种，此处我选择使用js来实现，比较动态灵活</em></p>
+</li>
+<li>
+<p>js启动代码如下</p>
+</li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;                                                                                                       </span><br><span class="line"><span class="number">258</span>     var $table = $(<span class="string">'#table'</span>),                                                                                  </span><br><span class="line"><span class="number">259</span>         $remove = $(<span class="string">'#remove'</span>),                                                                                </span><br><span class="line"><span class="number">260</span>         selections = [];                                                                                       </span><br><span class="line"><span class="number">261</span>                                                                                                                </span><br><span class="line"><span class="number">262</span>     function initTable() &#123;                                                                                     </span><br><span class="line"><span class="number">263</span>         $table.bootstrapTable(<span class="string">'destroy'</span>);                                                                      </span><br><span class="line"><span class="number">264</span>         $table.bootstrapTable(&#123;                                                                                </span><br><span class="line"><span class="number">265</span>             <span class="string">height:</span> getHeight(),                                                                               </span><br><span class="line"><span class="number">266</span>             <span class="string">columns:</span> [                                                                                                                                                                                                                                                                              </span><br><span class="line"><span class="number">267</span>                 [                                                                                              </span><br><span class="line"><span class="number">268</span>                     &#123;                                                                                          </span><br><span class="line"><span class="number">269</span>                         <span class="string">field:</span> <span class="string">'state'</span>,                                                                        </span><br><span class="line"><span class="number">270</span>                         <span class="string">checkbox:</span> <span class="literal">true</span>,                                                                        </span><br><span class="line"><span class="number">271</span>                         <span class="string">rowspan:</span> <span class="number">2</span>,                                                                            </span><br><span class="line"><span class="number">272</span>                         <span class="string">align:</span> <span class="string">'center'</span>,                                                                       </span><br><span class="line"><span class="number">273</span>                         <span class="string">valign:</span> <span class="string">'middle'</span>                                                                       </span><br><span class="line"><span class="number">274</span>                     &#125;, &#123;                                                                                       </span><br><span class="line"><span class="number">275</span>                         <span class="string">title:</span> <span class="string">'机房名称'</span>,                                                                     </span><br><span class="line"><span class="number">276</span>                         <span class="string">field:</span> <span class="string">'name'</span>,                                                                         </span><br><span class="line"><span class="number">277</span>                         <span class="string">rowspan:</span> <span class="number">2</span>,                                                                            </span><br><span class="line"><span class="number">278</span>                         <span class="string">align:</span> <span class="string">'center'</span>,                                                                       </span><br><span class="line"><span class="number">279</span>                         <span class="string">valign:</span> <span class="string">'middle'</span>,                                                                      </span><br><span class="line"><span class="number">280</span>                         <span class="string">sortable:</span> <span class="literal">true</span>,                                                                        </span><br><span class="line"><span class="number">281</span>                         <span class="string">footerFormatter:</span> totalTextFormatter                     </span><br><span class="line"><span class="number">282</span>   &#125;,&#123;                                                                                        </span><br><span class="line"><span class="number">283</span>                         <span class="string">title:</span> <span class="string">'设备位置'</span>,                                                                     </span><br><span class="line"><span class="number">284</span>                         <span class="string">field:</span> <span class="string">'location'</span>,                                                                     </span><br><span class="line"><span class="number">285</span>                         <span class="string">rowspan:</span> <span class="number">2</span>,                                                                            </span><br><span class="line"><span class="number">286</span>                         <span class="string">align:</span> <span class="string">'center'</span>,                                                                       </span><br><span class="line"><span class="number">287</span>                         <span class="string">valign:</span> <span class="string">'middle'</span>,                                                                      </span><br><span class="line"><span class="number">288</span>                         <span class="string">sortable:</span> <span class="literal">true</span>,                                                                        </span><br><span class="line"><span class="number">289</span>                         <span class="string">footerFormatter:</span> totalTextFormatter                     </span><br><span class="line"><span class="number">290</span>   &#125;,</span><br></pre></td></tr></table></figure>
+<p><em>这里面是一些要现实的字段，可以自己定义，后台传数据时，字段名称必须一样，然后在js里面启动这个初始化函数就可以了</em></p>
+<p>Flask里面根据路由来决定调用就可以了，代码如下</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">@app.route(<span class="string">'/get_data'</span>, methods=[<span class="string">'GET'</span>]).                                                                                                                                                                                                                                                          </span><br><span class="line"> <span class="number">467</span> def get_data():                                                                                                </span><br><span class="line"> <span class="number">468</span>     if request.method == <span class="string">"GET"</span>:                                                                                </span><br><span class="line"> <span class="number">469</span>         info = request.values                                                                                  </span><br><span class="line"> <span class="number">470</span>         limit = info.get(<span class="string">'limit'</span>, <span class="number">1000</span>)                                                                        </span><br><span class="line"> <span class="number">471</span>         offset = info.get(<span class="string">'offset'</span>, <span class="number">0</span>)                                          </span><br><span class="line"> <span class="number">472</span>         order = info.get(<span class="string">'order'</span>, <span class="string">'asc'</span>)                                                                       </span><br><span class="line"> <span class="number">473</span>         mache_info = json.load(open(<span class="string">'info.json'</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>))        </span><br><span class="line"> <span class="number">474</span>         total = len(mache_info[<span class="string">'xxx'</span>]) + len(mache_info[<span class="string">'xxx'</span>])     </span><br><span class="line"> <span class="number">475</span>         data = []                                                                                              </span><br><span class="line"> <span class="number">476</span>         for key in mache_info:                                                                                 </span><br><span class="line"> <span class="number">477</span>             for member in mache_info[key]:.                                                                    </span><br><span class="line"> <span class="number">478</span>                 d = &#123;&#125;                                                                                         </span><br><span class="line"> <span class="number">479</span>                 d[<span class="string">'name'</span>] = member[<span class="number">0</span>]                                                                          </span><br><span class="line"> <span class="number">480</span>                 d[<span class="string">'location'</span>] = member[<span class="number">1</span>]                                                                      </span><br><span class="line"> <span class="number">481</span>                 d[<span class="string">'noid'</span>] = member[<span class="number">2</span>]                                                                          </span><br><span class="line"> <span class="number">482</span>                 d[<span class="string">'type'</span>] = member[<span class="number">3</span>]                                                                          </span><br><span class="line"> <span class="number">483</span>                 d[<span class="string">'machetype'</span>]= member[<span class="number">4</span>]                                                                      </span><br><span class="line"> <span class="number">484</span>                 d[<span class="string">'serial'</span>] = member[<span class="number">5</span>]                                                                        </span><br><span class="line"> <span class="number">485</span>                 d[<span class="string">'hostname'</span>] =member[<span class="number">6</span>]                                                                       </span><br><span class="line"> <span class="number">486</span>                 d[<span class="string">'specification'</span>] =member[<span class="number">7</span>]                                                                  </span><br><span class="line"> <span class="number">487</span>                 d[<span class="string">'department'</span>] = member[<span class="number">8</span>]                                                                    </span><br><span class="line"> <span class="number">488</span>                 d[<span class="string">'infomation'</span>] = member[<span class="number">9</span>]                                                                    </span><br><span class="line"> <span class="number">489</span>                 data.append(d)                                                                                 </span><br><span class="line"> <span class="number">490</span>         return jsonify(&#123;<span class="string">'total'</span>: total, <span class="string">'rows'</span>: data[int(offset):(int(offset) + int(limit))]&#125;)</span><br></pre></td></tr></table></figure>
+<h4><span id="大概实现就是这样的因为需求在增加老大让我接着改慢慢添加更多的功能">大概实现就是这样的，因为需求在增加，老大让我接着改，慢慢添加更多的功能，</span></h4>
+<hr>
+<p>接着之前所做的，现在做了一个小功能。目前因为每行要显示的资料略微有些多，所以做了一个点击弹窗的功能，在弹窗显示当前行所有的内容，代码如下</p>
+<ul>
+<li>弹窗代码</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"modal"</span> <span class="built_in">id</span>=<span class="string">"machemodal"</span>&gt;                               </span><br><span class="line">    &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"modal-dialog"</span>&gt;                                    </span><br><span class="line">        &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"modal-content"</span>&gt;                               </span><br><span class="line">          &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"modal-header"</span>&gt;                              </span><br><span class="line">              &lt;h4 <span class="built_in">class</span>=<span class="string">"modal-title"</span> align=<span class="string">"center"</span>&gt;设备详情&lt;/h4&gt;    </span><br><span class="line">          &lt;/<span class="keyword">div</span>&gt;                                                  </span><br><span class="line">          &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"modal-body"</span>&gt;                                </span><br><span class="line">            &lt;p&gt; <span class="comment">-----&lt;/p&gt;                                         </span></span><br><span class="line">          &lt;/<span class="keyword">div</span>&gt;                                                  </span><br><span class="line">          &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"modal-footer"</span>&gt;                              </span><br><span class="line">          &lt;/<span class="keyword">div</span>&gt;                                                  </span><br><span class="line">        &lt;/<span class="keyword">div</span>&gt;                                                    </span><br><span class="line">    &lt;/<span class="keyword">div</span>&gt;                                                        </span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>js代码</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">onClickRow: <span class="function"><span class="keyword">function</span> (<span class="params">row, $element</span>)</span>&#123;                  </span><br><span class="line">    $(<span class="string">'#machemodal'</span>).modal(<span class="string">"toggle"</span>);                  </span><br><span class="line">    $(<span class="string">'#machemodal p'</span>).html(<span class="string">" "</span> +                      </span><br><span class="line">        <span class="string">"&lt;b&gt;机房名称 : &lt;/b&gt;"</span> + row.name + <span class="string">"&lt;br&gt;"</span> +         </span><br><span class="line">        <span class="string">"&lt;b&gt;设备位置 : &lt;/b&gt;"</span> + row.location + <span class="string">"&lt;br&gt;"</span> +     </span><br><span class="line">        <span class="string">"&lt;b&gt;资产编号 : &lt;/b&gt;"</span> + row.noid + <span class="string">"&lt;br&gt;"</span> +         </span><br><span class="line">        <span class="string">"&lt;b&gt;设备类型 : &lt;/b&gt;"</span> + row.type + <span class="string">"&lt;br&gt;"</span> +         </span><br><span class="line">           ······   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中onClickRow是插件封装好的一个事件，直接调用即可，row参数课获取点击行的所有数据，$element用来操作tr标签的</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/03/02/kubernetes/" data-toggle="tooltip" data-placement="top" title="关于Kubernetes的一些问题">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Blog" title="Blog">Blog</a>
+                        
+                          <a class="tag" href="/tags/#bootstrap-table" title="bootstrap-table">bootstrap-table</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="" target="_blank"></a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "http://yoursite.com/2018/03/08/bootstrap-table/";
+    var disqus_url = "http://yoursite.com/2018/03/08/bootstrap-table/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/SuperFate-KJ">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; superfate_kj 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://yoursite.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
