@@ -16,22 +16,29 @@
     </url>
 
     <url>
-        <loc>http://yoursite.com/tags/linux/</loc>
+        <loc>http://yoursite.com/tags/ssh/</loc>
         <lastmod>2018-04-02T10:43:55.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/linux/</loc>
+        <lastmod>2018-04-02T10:47:39.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://yoursite.com/tags/Blog/</loc>
-        <lastmod>2018-04-02T10:43:55.000Z</lastmod>
+        <lastmod>2018-04-02T10:47:39.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://yoursite.com/tags/ssh/</loc>
-        <lastmod>2018-04-02T10:43:55.000Z</lastmod>
+        <loc>http://yoursite.com/tags/apache-server/</loc>
+        <lastmod>2018-04-02T10:47:39.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
