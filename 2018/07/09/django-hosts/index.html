@@ -14,7 +14,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          blog | superlks
+          关于django多app多域名访问解决办法 - blog | superlks
         
     </title>
 
@@ -69,7 +69,7 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('undefined')
+            background-image: url('Demo.png')
             /*post*/
         
     }
@@ -90,9 +90,13 @@
                     <div class="post-heading">
                         <div class="tags">
                             
+                              <a class="tag" href="/tags/#Blog" title="Blog">Blog</a>
+                            
+                              <a class="tag" href="/tags/#django" title="django">django</a>
+                            
                         </div>
-                        <h1></h1>
-                        <h2 class="subheading"></h2>
+                        <h1>关于django多app多域名访问解决办法</h1>
+                        <h2 class="subheading">django-hosts</h2>
                         <span class="meta">
                             Posted by superfate_kj on
                             2018-07-09
@@ -212,8 +216,26 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <hr>
-<h2><span id="">{}</span></h2>
+                <p><em>这个问题是我在开发一个内部使用的系统遇到的，使用多域名访问同一个django项目，一开始想到的解决办法是在nginx上通过一些规则来解决，但是发现不太优雅，而且于开发人员来说并不太友好，此时就查到了</em><em>django-hosts</em><em>这个模块–&gt;<a href="https://github.com/jazzband/django-hosts" target="_blank" rel="noopener">github地址</a></em></p>
+<h4><span id="大概需求是这样的">大概需求是这样的</span></h4>
+<p><em><a href="http://x.abc.com" target="_blank" rel="noopener">x.abc.com</a>, y.abc.com与z.abc.com同时在一个django项目中使用，此时就有很大问题。多个app共同用一个urls，出现相同的views模块，就无法分辨是哪一个app的url</em></p>
+<h4><span id="使用方法">使用方法</span></h4>
+<ul>
+<li>添加’django-hosts’到项目的 settings 的 INSTALLED_APP 中</li>
+<li>添加’django_hosts.middleware.HostsRequestMiddleware’到项目的settings 的 MIDDLEWARE 中的开始位置</li>
+<li>添加’django_hosts.middleware.HostsRequestMiddleware’到项目的settings 的 MIDDLEWARE 中的结束位置</li>
+<li><a href="http://xn--settings-q86n.py" target="_blank" rel="noopener">在settings.py</a> <a href="http://xn--host-k84fuim98cvxonxak0uw7jl37c.py" target="_blank" rel="noopener">所在目录新建一个host.py</a> 的文件，写入下面的内容</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django_hosts <span class="keyword">import</span> patterns, host <span class="comment">#导入django-host</span></span><br><span class="line"><span class="keyword">from</span> django.conf <span class="keyword">import</span> settings        <span class="comment">#导入settings</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> yktcx <span class="keyword">import</span> views <span class="comment">#导入app1, app名字yktcx</span></span><br><span class="line"><span class="keyword">from</span> bookmanage <span class="keyword">import</span> views <span class="comment">#导入app2, bookmanage </span></span><br><span class="line"></span><br><span class="line">host_patterns = patterns(<span class="string">''</span>,</span><br><span class="line">    host(<span class="string">r'yktcx'</span>, <span class="string">'cardquery.urls'</span>, name=<span class="string">'yktcx'</span>),      <span class="comment">#子域名, yktcx.abc.com, </span></span><br><span class="line">    host(<span class="string">r'bookmanage'</span>, <span class="string">'bookmanage.urls'</span>, name=<span class="string">'bookmanage'</span>), <span class="comment">#子域名，bookmanage.abc.com</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在settings.py中，在ROOT_URLCONF之后增加</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ROOT_HOSTCONF</span> = <span class="string">'项目名.host'</span> #不是app名，我的项目名为Card，即Card.host,而yktcx和bookmanage是其中的app</span><br><span class="line"><span class="attr">DEFAULT_HOST</span>= <span class="string">'yktcx'</span> #即设置默认访问的二级域名，未匹配到任何正确的二级域名时，使用DEFAULT_HOST</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="http://xn--appurls-3w3kmj713ce7huoyd4t.py" target="_blank" rel="noopener">在不同app中新建urls.py</a>，和项目中的urls.py类似，如下</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url</span><br><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> views <span class="keyword">import</span> *</span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r'^login$'</span>, views.login),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>现在基本就差不多了</p>
 
                 
 
@@ -262,6 +284,10 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
+                          <a class="tag" href="/tags/#Blog" title="Blog">Blog</a>
+                        
+                          <a class="tag" href="/tags/#django" title="django">django</a>
+                        
                     </div>
                 </section>
                 

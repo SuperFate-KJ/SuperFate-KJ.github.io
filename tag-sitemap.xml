@@ -86,15 +86,22 @@
     </url>
 
     <url>
-        <loc>http://yoursite.com/tags/Blog/</loc>
+        <loc>http://yoursite.com/tags/bootstrap-table/</loc>
         <lastmod>2018-04-02T11:40:02.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://yoursite.com/tags/bootstrap-table/</loc>
-        <lastmod>2018-04-02T11:40:02.000Z</lastmod>
+        <loc>http://yoursite.com/tags/Blog/</loc>
+        <lastmod>2018-07-09T12:43:42.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/django/</loc>
+        <lastmod>2018-07-09T12:43:42.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
